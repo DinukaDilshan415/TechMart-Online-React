@@ -1,1 +1,22 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&display=swap');
 @import "tailwindcss";
+@theme {
+  --color-primary: #1e40af;
+  --color-accent: #10b981;
+  --color-edumartPrimary: #0096ed;
+
+  /* promate green bg-lime */
+  --color-edumartSecondary: #b2d235; 
+  /* promate green bg-lime */
+
+  --color-edumartHover: #1d7ebf;
+  --color-edumartBlack: #161e24;
+}
+
+
+*{
+  font-family: "Exo", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
