@@ -1,12 +1,25 @@
+import { Bounce, ToastContainer } from 'react-toastify'
 import './App.css'
+import AppRouter from './Components/AppRouter'
 
 function App() {
 
   return (
     <>
-      <div>
-        <h1 className='text-red-600 font-bold'>Hello</h1>
-      </div>
+      <AppRouter />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
     </>
   )
 }
