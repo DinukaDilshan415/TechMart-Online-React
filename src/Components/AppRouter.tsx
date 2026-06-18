@@ -3,6 +3,8 @@ import Home from "../Home/Home";
 import Login from "../Login/Login";
 import GuestRoute from "../SessionCheck/GuestRoute";
 import VerifyAccount from "../EmailVerification/VerifyAccount";
+import MyAccount from "../MyAccount/MyAccount";
+import ProtectedRoute from "../SessionCheck/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
   {
     path: "/Auth/VrifyAccount",
     Component: VerifyAccount
+  },
+    {
+    path: "/home/myaccount",
+    element: (
+      <ProtectedRoute>
+        <MyAccount />
+      </ProtectedRoute>
+    ),
   },
 
 ]);
