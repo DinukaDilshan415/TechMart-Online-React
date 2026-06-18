@@ -89,7 +89,7 @@ const LoginPage = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/Edumart-Backend/SignIn", {
+      const response = await fetch("http://localhost:8080/techmart/SignIn", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -129,7 +129,7 @@ const LoginPage = () => {
       <div className="w-full flex items-center justify-center mt-36 mb-16">
         <div className="w-10/12 flex items-center justify-center">
 
-          <div className="relative w-full max-w-4xl h-[600px] overflow-hidden shadow-2xs rounded-2xl">
+          <div className="relative w-full max-w-4xl h-150 overflow-hidden shadow-2xs rounded-2xl">
             <div id="container" className="absolute inset-0 flex transition-transform duration-500 ease-in-out">
 
               {/* <!-- Login Section --> */}
