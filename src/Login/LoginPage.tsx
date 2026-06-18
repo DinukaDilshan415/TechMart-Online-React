@@ -45,7 +45,7 @@ const LoginPage = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/Edumart-Backend/SignUp", {
+      const response = await fetch("http://localhost:8080/techmart/signup", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -53,9 +53,9 @@ const LoginPage = () => {
         },
         body: JSON.stringify(user)
       });
-
       if (response.ok) {
         const json = await response.json();
+
         if (json.status) {
           // redirect to verify page
           window.location.href = "/Auth/VrifyAccount";
