@@ -5,6 +5,11 @@ import GuestRoute from "../SessionCheck/GuestRoute";
 import VerifyAccount from "../EmailVerification/VerifyAccount";
 import MyAccount from "../MyAccount/MyAccount";
 import ProtectedRoute from "../SessionCheck/ProtectedRoute";
+import AdminProtectedRoute from "../SessionCheck/AdminProtectedRoute";
+import AdminDashboard from "../Admin/AdminDashboard";
+import AdminGuestRoute from "../SessionCheck/AdminGuestRoute";
+import AdminLoginPage from "../Admin/AdminLoginPage";
+import AdminVerificationPage from "../Admin/AdminVerificationPage";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +34,27 @@ const router = createBrowserRouter([
       <ProtectedRoute>
         <MyAccount />
       </ProtectedRoute>
+    ),
+  },
+   {
+    path: "/admin/dashboard",
+    element: (
+      <AdminProtectedRoute>
+        <AdminDashboard />
+      </AdminProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin/login",
+    element: (
+      <AdminGuestRoute>
+      <AdminLoginPage />
+      </AdminGuestRoute>
+    ),
+  }, {
+    path: "/admin/verification",
+    element: (
+      <AdminVerificationPage />
     ),
   },
 
