@@ -6,7 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { LogOut } from 'lucide-react';
+import { LogOut, Warehouse } from 'lucide-react';
 import { Chart, registerables } from 'chart.js';
 import { useReactToPrint } from "react-to-print";
 
@@ -98,6 +98,7 @@ type ProductData = {
     name: string;
     description: string;
     brand_id: number | string;
+    warehouse_id: number | string;
     stock: number | string;
     price: number | string;
     discount: number | string;
@@ -142,10 +143,16 @@ let mockBrands = [
     { id: 3, name: 'ComfortZone' },
 ];
 
+let mockWarehouses = [
+    { id: 1, name: 'warehouse 1' },
+    { id: 2, name: 'warehouse 2' },
+    { id: 3, name: 'warehouse 3' },
+];
+
 let mockProducts = [
-    { id: 1, name: 'A4 Paper Ream (500 Sheets)', description: 'High-quality A4 paper for printing and copying', sub_category_id: 1, brand_id: 1, stock: 150, price: 5.99, discount: 0, active: true, imageUrl: 'https://placehold.co/100x100/E2E8F0/4A5568?text=A4+Paper' },
-    { id: 2, name: 'Parker Jotter Ballpoint Pen', description: 'Classic ballpoint pen with smooth writing experience', sku: 'OFF-PEN-PRK-JTR', sub_category_id: 3, brand_id: 2, stock: 300, price: 12.50, discount: 10, active: true, imageUrl: 'https://placehold.co/100x100/E2E8F0/4A5568?text=Pen' },
-    { id: 3, name: 'Ergonomic Office Chair', description: 'Comfortable office chair with ergonomic design', sku: 'OFF-FNT-CHR-ERGO', sub_category_id: 5, brand_id: 3, stock: 25, price: 120.00, discount: 15, active: false, imageUrl: 'https://placehold.co/100x100/E2E8F0/4A5568?text=Chair' },
+    { id: 1, name: 'A4 Paper Ream (500 Sheets)', description: 'High-quality A4 paper for printing and copying', sub_category_id: 1, brand_id: 1, warehouse_id: 1, stock: 150, price: 5.99, discount: 0, active: true, imageUrl: 'https://placehold.co/100x100/E2E8F0/4A5568?text=A4+Paper' },
+    { id: 2, name: 'Parker Jotter Ballpoint Pen', description: 'Classic ballpoint pen with smooth writing experience', sku: 'OFF-PEN-PRK-JTR', sub_category_id: 3, brand_id: 2, warehouse_id: 1, stock: 300, price: 12.50, discount: 10, active: true, imageUrl: 'https://placehold.co/100x100/E2E8F0/4A5568?text=Pen' },
+    { id: 3, name: 'Ergonomic Office Chair', description: 'Comfortable office chair with ergonomic design', sku: 'OFF-FNT-CHR-ERGO', sub_category_id: 5, brand_id: 3, warehouse_id: 1, stock: 25, price: 120.00, discount: 15, active: false, imageUrl: 'https://placehold.co/100x100/E2E8F0/4A5568?text=Chair' },
 ];
 
 let mockOrders: Order[] = [
@@ -401,7 +408,7 @@ const showLogoutConfirm = () => {
 
 const logOutFromAccount = async () => {
     try {
-        const response = await fetch("http://localhost:8080/Edumart-Backend/AdminSignOut", {
+        const response = await fetch("http://localhost:8080/techmart/AdminSignOut", {
             method: "GET",
             credentials: "include",
         });
@@ -856,6 +863,7 @@ const AddEditProduct: FC<{ setView: SetViewFn; params?: { id: number } }> = ({ s
         name: product?.name || '',
         description: product?.description || '',
         brand_id: product?.brand_id || 0,
+        warehouse_id: product?.warehouse_id || 0,
         stock: product?.stock || 0,
         price: product?.price || 0,
         discount: product?.discount || 0,
@@ -1065,7 +1073,7 @@ const AddEditProduct: FC<{ setView: SetViewFn; params?: { id: number } }> = ({ s
                     </div>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-700 mt-8 mb-4 border-b pb-2">Details, Pricing & Stock</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
                         <label className="block text-gray-700 font-medium mb-2">Brand</label>
                         <select disabled={isEditMode != undefined && isEditMode > 0} value={productData.brand_id} onChange={(e) => setProductData({ ...productData, brand_id: e.target.value })} className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"><option value={0}>Select Brand</option>{mockBrands.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
@@ -1073,6 +1081,11 @@ const AddEditProduct: FC<{ setView: SetViewFn; params?: { id: number } }> = ({ s
                     </div>
                     <div><label className="block text-gray-700 font-medium mb-2">Stock Quantity</label>
                         <input type="number" value={productData.stock} onChange={(e) => setProductData({ ...productData, stock: e.target.value })} min="0" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+                    <div>
+                        <label className="block text-gray-700 font-medium mb-2">Warehouse</label>
+                        <select disabled={isEditMode != undefined && isEditMode > 0} value={productData.warehouse_id} onChange={(e) => setProductData({ ...productData, warehouse_id: e.target.value })} className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"><option value={0}>Select Warehouse</option>{mockWarehouses.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
+                        </select>
                     </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
@@ -2006,7 +2019,7 @@ const AdminDashboard: FC = () => {
 
     const loadProductData = async () => {
         try {
-            const response = await fetch("http://localhost:8080/Edumart-Backend/LoadProductData", {
+            const response = await fetch("http://localhost:8080/techmart/LoadProductData", {
                 method: "GET",
                 credentials: "include",
             });
@@ -2014,6 +2027,7 @@ const AdminDashboard: FC = () => {
             if (response.ok) {
                 const json = await response.json();
                 mockBrands = json.brandList || [];
+                mockWarehouses = json.warehouseList || [];
                 mockMainCategories = json.mainCategoryList || [];
                 mockCategories = json.categoryList.map((cat: { id: number; name: string; mainCategory: { id: number } }) => ({
                     id: cat.id,
