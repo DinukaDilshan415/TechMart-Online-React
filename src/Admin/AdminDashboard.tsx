@@ -891,7 +891,7 @@ const AddEditProduct: FC<{ setView: SetViewFn; params?: { id: number } }> = ({ s
         });
 
         try {
-            const response = await fetch("http://localhost:8080/Edumart-Backend/SaveProduct", {
+            const response = await fetch("http://localhost:8080/techmart/SaveProduct", {
                 method: "POST",
                 credentials: "include",
                 body: formData
@@ -1004,7 +1004,7 @@ const AddEditProduct: FC<{ setView: SetViewFn; params?: { id: number } }> = ({ s
             });
 
             try {
-                const response = await fetch("http://localhost:8080/Edumart-Backend/StockCheck", {
+                const response = await fetch("http://localhost:8080/techmart/StockCheck", {
                     method: "POST",
                     credentials: "include",
                     body: formData
