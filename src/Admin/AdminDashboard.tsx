@@ -478,7 +478,7 @@ const DashboardPage: FC = () => {
                                 name: item.stock.product.title,
                                 sold: `${item.totalQty} units`,
                                 revenue: `LKR ${item.itemRevenue}.00`,
-                                img: `http://localhost:8080/Edumart-Backend/product-images/${item.stock.product.id}/image1.png`
+                                img: `http://localhost:8080/techmart/product-images/${item.stock.product.id}/image1.png`
                             })),
                             lowStockItems: json.dashboardData[2].map((item: any) => ({
                                 name: item.product.title,
@@ -748,7 +748,7 @@ const ProductList: FC<{ setView: SetViewFn }> = ({ setView }) => {
 
     const loadAllProducts = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/Edumart-Backend/LoadAllProducts`, {
+            const response = await fetch(`http://localhost:8080/techmart/LoadAllProducts`, {
                 method: "GET",
                 credentials: "include"
             });
@@ -766,7 +766,7 @@ const ProductList: FC<{ setView: SetViewFn }> = ({ setView }) => {
                         price: item.price,
                         discount: item.product.discount,
                         active: item.product.status.id == 1,
-                        imageUrl: `http://localhost:8080/Edumart-Backend/product-images/${item.product.id}/image1.png`
+                        imageUrl: `http://localhost:8080/techmart/product-images/${item.product.id}/image1.png`
                     }));
                     setProducts(mockProducts);
                 } else {
@@ -867,7 +867,7 @@ const AddEditProduct: FC<{ setView: SetViewFn; params?: { id: number } }> = ({ s
         stock: product?.stock || 0,
         price: product?.price || 0,
         discount: product?.discount || 0,
-        image: `http://localhost:8080/Edumart-Backend/product-images/${product?.id}/image1.png`,
+        image: `http://localhost:8080/techmart/product-images/${product?.id}/image1.png`,
         mainCategory: '',
         category: '',
         subCategory: '',
@@ -1390,7 +1390,7 @@ const OrdersPage: FC = () => {
                     acc[group.orderId] = group.invoiceItemses.map((item: any) => ({
                         productId: item.stock.product.id,
                         productName: item.stock.product.title,
-                        productImageUrl: `http://localhost:8080/Edumart-Backend/product-images/${item.stock.product.id}/image1.png`,
+                        productImageUrl: `http://localhost:8080/techmart/product-images/${item.stock.product.id}/image1.png`,
                         brandName: item.stock.product.brand.name,
                         qty: item.qty,
                         price: item.stock.price,
