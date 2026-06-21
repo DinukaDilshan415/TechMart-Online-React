@@ -10,6 +10,7 @@ import AdminDashboard from "../Admin/AdminDashboard";
 import AdminGuestRoute from "../SessionCheck/AdminGuestRoute";
 import AdminLoginPage from "../Admin/AdminLoginPage";
 import AdminVerificationPage from "../Admin/AdminVerificationPage";
+import SingleProductView from "../Product/SingleProductView";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
     element: (
       <AdminVerificationPage />
     ),
+  },
+  {
+    path: "/singleproduct",
+    Component: SingleProductView
   },
 
 ]);
