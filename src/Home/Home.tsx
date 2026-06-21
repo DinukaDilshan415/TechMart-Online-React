@@ -1,21 +1,16 @@
+import MainNav from "../Components/MainNav"
 import Footer from "../Footer/Footer"
 import Header from "../Header/Header"
+import HomeProducts from "./HomeProducts"
 
 const Home = () => {
 
   return (
     <>
       <Header />
-      {/* <MainNav /> */}
+      <MainNav />
       <div className="container mx-auto px-4">
-        {/* <HomeProducts/> */}
-        <h1>Homr</h1><br/>
-        <h1>Homr</h1><br/>
-        <h1>Homr</h1><br/>
-        <h1>Homr</h1><br/>
-        <h1>Homr</h1><br/>
-        <h1>Homr</h1><br/>
-        <h1>Homr</h1><br/>
+        <HomeProducts/>
       </div>
       <Footer />
     </>
