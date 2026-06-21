@@ -227,7 +227,7 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({ section }) => {
   };
 
   return (
-    <section className="mb-10">
+    <section className="mb-10 mt-2">
       <div className="flex justify-between items-center mb-4 px-2 sm:px-0">
         <h2 className="text-xl md:text-2xl font-bold text-gray-800">{section.title}</h2>
         <div className="hidden sm:flex items-center space-x-4 text-sm font-medium text-gray-500">
@@ -280,7 +280,7 @@ const HomeProducts: React.FC = () => {
 
     const loadProducts = async () => {
       try {
-        const response = await fetch("http://localhost:8080/Edumart-Backend/LoadHomeProducts", {
+        const response = await fetch("http://localhost:8080/techmart/LoadHomeProducts", {
           method: "GET",
           credentials: "include"
         });
@@ -302,7 +302,7 @@ const HomeProducts: React.FC = () => {
                     .map((p: any) => ({
                       id: p.product.id,
                       name: p.product.title,
-                      img: `http://localhost:8080/Edumart-Backend/product-images/${p.product.id}/image1.png`,
+                      img: `http://localhost:8080/techmart/product-images/${p.product.id}/image1.png`,
                       price: p.price.toFixed(2),
                       oldPrice:
                         p.product.discount && p.product.discount !== 0
@@ -332,7 +332,7 @@ const HomeProducts: React.FC = () => {
 
     const loadPopulerCategories = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/Edumart-Backend/LoadPopulerCategories`, {
+        const response = await fetch(`http://localhost:8080/techmart/LoadPopulerCategories`, {
           method: "GET",
           credentials: "include"
         });
@@ -375,14 +375,14 @@ const HomeProducts: React.FC = () => {
     <div className="bg-white p-2 sm:p-6 md:p-8 font-sans">
 
       {/* Popular Categories Section */}
-      <section className="mb-10">
+      <section className="">
         <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 px-2 sm:px-0">Popular Categories</h2>
         <div className="flex items-start gap-4 p-2 -m-2 overflow-x-auto">
           {populerCategories.map((category) => (
             <PopularCategoryCard key={category.name} category={category} />
           ))}
         </div>
-        <hr className="mt-10 border-gray-200" />
+        <hr className=" border-gray-200" />
       </section>
 
       {/* Product Sections */}
