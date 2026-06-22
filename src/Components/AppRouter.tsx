@@ -11,6 +11,7 @@ import AdminGuestRoute from "../SessionCheck/AdminGuestRoute";
 import AdminLoginPage from "../Admin/AdminLoginPage";
 import AdminVerificationPage from "../Admin/AdminVerificationPage";
 import SingleProductView from "../Product/SingleProductView";
+import Cart from "../Cart/Cart";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
   {
     path: "/singleproduct",
     Component: SingleProductView
+  },
+  {
+    path: "/product/cart",
+    Component: Cart
   },
 
 ]);
