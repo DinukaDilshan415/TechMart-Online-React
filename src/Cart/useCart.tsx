@@ -13,7 +13,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchCartCount = async () => {
     try {
-      const res = await fetch("http://localhost:8080/Edumart-Backend/GetCartCount", {
+      const res = await fetch("http://localhost:8080/techmart/GetCartCount", {
           method: "GET",
           credentials: "include"
         });

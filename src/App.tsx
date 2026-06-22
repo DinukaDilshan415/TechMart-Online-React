@@ -1,12 +1,15 @@
 import { Bounce, ToastContainer } from 'react-toastify'
 import './App.css'
 import AppRouter from './Components/AppRouter'
+import { CartProvider } from './Cart/useCart'
 
 function App() {
 
   return (
     <>
-      <AppRouter />
+      <CartProvider>
+        <AppRouter />
+      </CartProvider>
       <ToastContainer
         position="top-right"
         autoClose={5000}

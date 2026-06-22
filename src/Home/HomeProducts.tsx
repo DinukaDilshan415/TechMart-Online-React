@@ -130,7 +130,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
 const addToCart = async (productId: string, qty: number) => {
 
   try {
-    const response = await fetch(`http://localhost:8080/Edumart-Backend/AddToCart?id=${productId}&qty=${qty}`, {
+    const response = await fetch(`http://localhost:8080/techmart/AddToCart?id=${productId}&qty=${qty}`, {
       method: "GET",
       credentials: "include"
     });
@@ -161,7 +161,7 @@ const addToCart = async (productId: string, qty: number) => {
 const checkSessionCart = async () => {
 
   try {
-    const response = await fetch(`http://localhost:8080/Edumart-Backend/CheckSessionCart`, {
+    const response = await fetch(`http://localhost:8080/techmart/CheckSessionCart`, {
       method: "GET",
       credentials: "include"
     });

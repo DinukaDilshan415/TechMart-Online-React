@@ -1,10 +1,10 @@
 import { ShoppingCart } from 'lucide-react';
-// import { useCart } from '../Cart/useCart';
+import { useCart } from '../Cart/useCart';
 import { useState } from 'react';
 
 export default function Header() {
 
-  // const { cartCount, fetchCartCount } = useCart();
+  const { cartCount, fetchCartCount } = useCart();
   const [searchText, setSearchText] = useState('');
 
   const handleSearch = () => {
@@ -15,7 +15,7 @@ export default function Header() {
 
   return (
 
-    <div className='fixed w-full top-0 z-50 flex justify-center bg-slate-50 p-4' >
+    <div className='fixed w-full top-0 z-50 flex justify-center bg-slate-50 p-4' onClick={fetchCartCount}>
 
       <div className="w-10/12 top-0 z-50 flex justify-between bg-slate-50">
         {/* <!-- brand-image --> */}
@@ -82,7 +82,7 @@ export default function Header() {
                 <span className="sr-only">Notifications</span>
                 <div
                   className="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-black border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-                </div>
+                  {cartCount}</div>
               </button>
             </a>
           </div>
