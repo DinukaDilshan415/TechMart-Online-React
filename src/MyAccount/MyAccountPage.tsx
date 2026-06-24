@@ -155,7 +155,7 @@ const MyAccountPage = () => {
 
   const fetchAccountData = async () => {
     try {
-      const response = await fetch("http://localhost:8080/Edumart-Backend/SetAccountData", {
+      const response = await fetch("http://localhost:8080/techmart/SetAccountData", {
         method: "GET", credentials: "include",
       });
       if (response.ok) {
@@ -177,7 +177,7 @@ const MyAccountPage = () => {
 
   const loadCityData = async () => {
     try {
-      const response = await fetch("http://localhost:8080/Edumart-Backend/LoadCityData", {
+      const response = await fetch("http://localhost:8080/techmart/LoadCityData", {
         method: "GET", credentials: "include",
       });
       if (response.ok) {
@@ -194,7 +194,7 @@ const MyAccountPage = () => {
 
   const loadAddresses = async () => {
     try {
-      const response = await fetch("http://localhost:8080/Edumart-Backend/SaveNewAddress", {
+      const response = await fetch("http://localhost:8080/techmart/SaveNewAddress", {
         method: "GET", credentials: "include",
       });
       if (response.ok) {
@@ -224,7 +224,7 @@ const MyAccountPage = () => {
 
   const loadOrders = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/Edumart-Backend/LoadUserOrders`, {
+      const response = await fetch(`http://localhost:8080/techmart/LoadUserOrders`, {
         method: "GET",
         credentials: "include"
       });
@@ -286,7 +286,7 @@ const MyAccountPage = () => {
         brand: item.stock.product.brand.name,
         quantity: item.qty,
         price: `LKR ${item.stock.price}.00`,
-        imageUrl: `http://localhost:8080/Edumart-Backend/product-images/${item.stock.product.id}/image1.png`,
+        imageUrl: `http://localhost:8080/techmart/product-images/${item.stock.product.id}/image1.png`,
         status: status
       }))
       : [];
@@ -304,7 +304,7 @@ const MyAccountPage = () => {
       mobile: userProfile.mobile,
     };
     try {
-      const response = await fetch("http://localhost:8080/Edumart-Backend/UpdateUserProfile", {
+      const response = await fetch("http://localhost:8080/techmart/UpdateUserProfile", {
         method: "PUT",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -329,7 +329,7 @@ const MyAccountPage = () => {
 
   const saveNewAddress = async () => {
     try {
-      const response = await fetch("http://localhost:8080/Edumart-Backend/SaveNewAddress", {
+      const response = await fetch("http://localhost:8080/techmart/SaveNewAddress", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -356,7 +356,7 @@ const MyAccountPage = () => {
 
   const handleDeleteAddress = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:8080/Edumart-Backend/DeleteAddress?id=${id}`, {
+      const response = await fetch(`http://localhost:8080/techmart/DeleteAddress?id=${id}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -384,7 +384,7 @@ const MyAccountPage = () => {
       confirmPassword: password.confirmPassword
     };
     try {
-      const response = await fetch("http://localhost:8080/Edumart-Backend/UpdateUserPassword", {
+      const response = await fetch("http://localhost:8080/techmart/UpdateUserPassword", {
         method: "PUT",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -825,7 +825,7 @@ const MyAccountPage = () => {
       };
 
       try {
-        const response = await fetch("http://localhost:8080/Edumart-Backend/SubmitProductReview", {
+        const response = await fetch("http://localhost:8080/techmart/SubmitProductReview", {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
