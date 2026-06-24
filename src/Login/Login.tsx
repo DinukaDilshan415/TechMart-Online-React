@@ -9,7 +9,6 @@ const Login = () => {
                 <Header />
                 <LoginPage />
                 <Footer/>
-                <h1 className="text-6xl text-amber-500">Login</h1>
             </div>
         </>
     )
