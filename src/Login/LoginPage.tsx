@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { TECHMART_BASE_URL, DEFAULT_HEADERS } from '../api/client';
 
 const LoginPage = () => {
 
@@ -45,11 +46,11 @@ const LoginPage = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/techmart/signup", {
+      const response = await fetch(`${TECHMART_BASE_URL}/signup`, {
         method: "POST",
         credentials: "include",
         headers: {
-          "Content-Type": "application/json"
+          ...DEFAULT_HEADERS,
         },
         body: JSON.stringify(user)
       });
@@ -89,11 +90,11 @@ const LoginPage = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/techmart/SignIn", {
+      const response = await fetch(`${TECHMART_BASE_URL}/SignIn`, {
         method: "POST",
         credentials: "include",
         headers: {
-          "Content-Type": "application/json"
+          ...DEFAULT_HEADERS,
         },
         body: JSON.stringify(signIn)
       });

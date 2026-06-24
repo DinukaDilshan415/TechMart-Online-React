@@ -1,6 +1,7 @@
 import { Maximize2, RefreshCcw } from 'lucide-react';
 import React, { useState, useMemo, useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { TECHMART_BASE_URL, DEFAULT_HEADERS } from '../api/client';
 
 // --- Type Definitions ---
 interface CartItemType {
@@ -259,9 +260,12 @@ const CartPage: React.FC = () => {
 
   const updateCartQty = async (id: number, qty: number) => {
     try {
-      const response = await fetch(`http://localhost:8080/techmart/UpdateCartQtyFromCart?id=${id}&qty=${qty}`, {
+      const response = await fetch(`${TECHMART_BASE_URL}/UpdateCartQtyFromCart?id=${id}&qty=${qty}`, {
         method: "GET",
-        credentials: "include"
+        credentials: "include",
+        headers: {
+          ...DEFAULT_HEADERS,
+        }
       });
 
       if (response.ok) {
@@ -303,9 +307,12 @@ const CartPage: React.FC = () => {
 
   const removeFromCart = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:8080/techmart/RemoveFromCart?id=${id}`, {
+      const response = await fetch(`${TECHMART_BASE_URL}/RemoveFromCart?id=${id}`, {
         method: "GET",
-        credentials: "include"
+        credentials: "include",
+        headers: {
+          ...DEFAULT_HEADERS,
+        }
       });
 
       if (response.ok) {
@@ -336,9 +343,12 @@ const CartPage: React.FC = () => {
 
   const saveTempCarts = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/techmart/SaveTempCart`, {
+      const response = await fetch(`${TECHMART_BASE_URL}/SaveTempCart`, {
         method: "GET",
-        credentials: "include"
+        credentials: "include",
+        headers: {
+          ...DEFAULT_HEADERS,
+        }
       });
 
       if (response.ok) {
@@ -360,43 +370,46 @@ const CartPage: React.FC = () => {
   };
 
   const loadCartItems = async () => {
-      await saveTempCarts();
-      try {
-        const response = await fetch(`http://localhost:8080/techmart/LoadCartItems`, {
-          method: "GET",
-          credentials: "include"
-        });
-
-        if (response.ok) {
-          const json = await response.json();
-          if (json.status) {
-            console.log(json);
-
-            const items = json.cartItems.map((item: any) => ({
-              id: item.product.id,
-              name: item.product.title,
-              price: item.stock.price.toFixed(2),
-              oldPrice: (item.stock.price * 100 / (100 - item.product.discount)).toFixed(2),
-              quantity: item.qty,
-              discount: item.product.discount,
-              image: `http://localhost:8080/techmart/product-images/${item.product.id}/image1.png`
-            }));
-
-            setCartItems(items);
-
-          } else {
-            console.log(json.message);
-            toast.error(json.message);
-          }
-        } else {
-          console.log("LoadCartItems failed. Please try again");
-          toast.error("LoadCartItems failed. Please try again");
+    await saveTempCarts();
+    try {
+      const response = await fetch(`${TECHMART_BASE_URL}/LoadCartItems`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          ...DEFAULT_HEADERS,
         }
-      } catch (error) {
-        toast.error("Internal Server Error. Please try again later");
-        console.error("LoadCartItems Error:", error);
+      });
+
+      if (response.ok) {
+        const json = await response.json();
+        if (json.status) {
+          console.log(json);
+
+          const items = json.cartItems.map((item: any) => ({
+            id: item.product.id,
+            name: item.product.title,
+            price: item.stock.price.toFixed(2),
+            oldPrice: (item.stock.price * 100 / (100 - item.product.discount)).toFixed(2),
+            quantity: item.qty,
+            discount: item.product.discount,
+            image: `http://localhost:8080/techmart/product-images/${item.product.id}/image1.png`
+          }));
+
+          setCartItems(items);
+
+        } else {
+          console.log(json.message);
+          toast.error(json.message);
+        }
+      } else {
+        console.log("LoadCartItems failed. Please try again");
+        toast.error("LoadCartItems failed. Please try again");
       }
-    };
+    } catch (error) {
+      toast.error("Internal Server Error. Please try again later");
+      console.error("LoadCartItems Error:", error);
+    }
+  };
 
   useEffect(() => {
     loadCartItems();

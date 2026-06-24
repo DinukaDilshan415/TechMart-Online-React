@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { format } from 'date-fns';
+import { TECHMART_BASE_URL, DEFAULT_HEADERS } from '../api/client';
 
 // --- INTERFACES ---
 
@@ -155,8 +156,12 @@ const MyAccountPage = () => {
 
   const fetchAccountData = async () => {
     try {
-      const response = await fetch("http://localhost:8080/techmart/SetAccountData", {
-        method: "GET", credentials: "include",
+      const response = await fetch(`${TECHMART_BASE_URL}/SetAccountData`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          ...DEFAULT_HEADERS,
+        }
       });
       if (response.ok) {
         const json = await response.json();
@@ -177,8 +182,12 @@ const MyAccountPage = () => {
 
   const loadCityData = async () => {
     try {
-      const response = await fetch("http://localhost:8080/techmart/LoadCityData", {
-        method: "GET", credentials: "include",
+      const response = await fetch(`${TECHMART_BASE_URL}/LoadCityData`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          ...DEFAULT_HEADERS,
+        }
       });
       if (response.ok) {
         const json = await response.json();
@@ -194,8 +203,12 @@ const MyAccountPage = () => {
 
   const loadAddresses = async () => {
     try {
-      const response = await fetch("http://localhost:8080/techmart/SaveNewAddress", {
-        method: "GET", credentials: "include",
+      const response = await fetch(`${TECHMART_BASE_URL}/SaveNewAddress`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          ...DEFAULT_HEADERS,
+        }
       });
       if (response.ok) {
         const json = await response.json();
@@ -224,9 +237,12 @@ const MyAccountPage = () => {
 
   const loadOrders = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/techmart/LoadUserOrders`, {
+      const response = await fetch(`${TECHMART_BASE_URL}/LoadUserOrders`, {
         method: "GET",
-        credentials: "include"
+        credentials: "include",
+        headers: {
+          ...DEFAULT_HEADERS,
+        }
       });
 
       if (response.ok) {
@@ -304,10 +320,12 @@ const MyAccountPage = () => {
       mobile: userProfile.mobile,
     };
     try {
-      const response = await fetch("http://localhost:8080/techmart/UpdateUserProfile", {
+      const response = await fetch(`${TECHMART_BASE_URL}/UpdateUserProfile`, {
         method: "PUT",
         credentials: "include",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          ...DEFAULT_HEADERS,
+        },
         body: JSON.stringify(updateData)
       });
       if (response.ok) {
@@ -329,10 +347,12 @@ const MyAccountPage = () => {
 
   const saveNewAddress = async () => {
     try {
-      const response = await fetch("http://localhost:8080/techmart/SaveNewAddress", {
+      const response = await fetch(`${TECHMART_BASE_URL}/SaveNewAddress`, {
         method: "POST",
         credentials: "include",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          ...DEFAULT_HEADERS,
+        },
         body: JSON.stringify(newAddress)
       });
       if (response.ok) {
@@ -356,9 +376,12 @@ const MyAccountPage = () => {
 
   const handleDeleteAddress = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:8080/techmart/DeleteAddress?id=${id}`, {
+      const response = await fetch(`${TECHMART_BASE_URL}/DeleteAddress?id=${id}`, {
         method: "DELETE",
         credentials: "include",
+        headers: {
+          ...DEFAULT_HEADERS,
+        }
       });
       if (response.ok) {
         const json = await response.json();
@@ -384,10 +407,12 @@ const MyAccountPage = () => {
       confirmPassword: password.confirmPassword
     };
     try {
-      const response = await fetch("http://localhost:8080/techmart/UpdateUserPassword", {
+      const response = await fetch(`${TECHMART_BASE_URL}/UpdateUserPassword`, {
         method: "PUT",
         credentials: "include",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          ...DEFAULT_HEADERS,
+        },
         body: JSON.stringify(updateData)
       });
       if (response.ok) {
@@ -409,9 +434,12 @@ const MyAccountPage = () => {
 
   const logOutFromAccount = async () => {
     try {
-      const response = await fetch("http://localhost:8080/techmart/SignOut", {
+      const response = await fetch(`${TECHMART_BASE_URL}/SignOut`, {
         method: "GET",
         credentials: "include",
+      headers: {
+        ...DEFAULT_HEADERS,
+      }
       });
       if (response.ok) {
         const json = await response.json();
@@ -825,10 +853,12 @@ const MyAccountPage = () => {
       };
 
       try {
-        const response = await fetch("http://localhost:8080/techmart/SubmitProductReview", {
+        const response = await fetch(`${TECHMART_BASE_URL}/SubmitProductReview`, {
           method: "POST",
           credentials: "include",
-          headers: { "Content-Type": "application/json" },
+      headers: {
+        ...DEFAULT_HEADERS,
+      },
           body: JSON.stringify(reviewDetails)
         });
         if (response.ok) {

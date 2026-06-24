@@ -1,5 +1,6 @@
 // context/CartContext.tsx
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { TECHMART_BASE_URL, DEFAULT_HEADERS } from '../api/client';
 
 type CartContextType = {
   cartCount: number;
@@ -13,10 +14,13 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchCartCount = async () => {
     try {
-      const res = await fetch("http://localhost:8080/techmart/GetCartCount", {
-          method: "GET",
-          credentials: "include"
-        });
+      const res = await fetch(`${TECHMART_BASE_URL}/GetCartCount`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          ...DEFAULT_HEADERS,
+        }
+      });
       const data = await res.json();
       setCartCount(data.count); // assuming response is { "count": 5 }
     } catch (error) {

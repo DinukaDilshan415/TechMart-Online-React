@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
+import { TECHMART_BASE_URL, DEFAULT_HEADERS } from '../api/client';
 
 // --- TYPE DEFINITIONS ---
 
@@ -97,8 +98,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
             className="w-full h-full object-contain object-center transition-transform duration-300 group-hover:scale-105"
           />
         </div>
-        {product.discount && (
-          <div className="absolute bottom-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">-{product.discount}%</div>
+        {product.discount !== 0 && (
+          <div className="absolute bottom-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+            -{product.discount}%
+          </div>
         )}
         <a href="#" onClick={(e) => e.preventDefault()} className="absolute inset-0">
           <button onClick={() => addToCart(String(product.id), 1)} className="absolute bottom-2 right-2 bg-lime-500 text-white p-2 rounded-full hover:bg-lime-600 transition-colors">
@@ -130,9 +133,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
 const addToCart = async (productId: string, qty: number) => {
 
   try {
-    const response = await fetch(`http://localhost:8080/techmart/AddToCart?id=${productId}&qty=${qty}`, {
+    const response = await fetch(`${TECHMART_BASE_URL}/AddToCart?id=${productId}&qty=${qty}`, {
       method: "GET",
-      credentials: "include"
+      credentials: "include",
+      headers: {
+        ...DEFAULT_HEADERS,
+      }
     });
 
     if (response.ok) {
@@ -161,9 +167,12 @@ const addToCart = async (productId: string, qty: number) => {
 const checkSessionCart = async () => {
 
   try {
-    const response = await fetch(`http://localhost:8080/techmart/CheckSessionCart`, {
+    const response = await fetch(`${TECHMART_BASE_URL}/CheckSessionCart`, {
       method: "GET",
-      credentials: "include"
+      credentials: "include",
+      headers: {
+        ...DEFAULT_HEADERS,
+      }
     });
 
     if (response.ok) {
@@ -280,9 +289,12 @@ const HomeProducts: React.FC = () => {
 
     const loadProducts = async () => {
       try {
-        const response = await fetch("http://localhost:8080/techmart/LoadHomeProducts", {
+        const response = await fetch(`${TECHMART_BASE_URL}/LoadHomeProducts`, {
           method: "GET",
-          credentials: "include"
+          credentials: "include",
+          headers: {
+            ...DEFAULT_HEADERS,
+          }
         });
 
         if (response.ok) {
@@ -332,9 +344,12 @@ const HomeProducts: React.FC = () => {
 
     const loadPopulerCategories = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/techmart/LoadPopulerCategories`, {
+        const response = await fetch(`${TECHMART_BASE_URL}/LoadPopulerCategories`, {
           method: "GET",
-          credentials: "include"
+          credentials: "include",
+          headers: {
+            ...DEFAULT_HEADERS,
+          }
         });
 
         if (response.ok) {
@@ -343,7 +358,7 @@ const HomeProducts: React.FC = () => {
             console.log(json);
 
             const items = json.categories.map((item: any) => ({
-              name: item.name, 
+              name: item.name,
               image: item.image
             }));
 
