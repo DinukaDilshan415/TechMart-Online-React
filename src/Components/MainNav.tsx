@@ -222,7 +222,7 @@ const MainNav = () => {
                                 <li className="category-item border-b border-gray-100" data-category="home-appliances">
                                     <a href="#" className="flex items-center px-4 py-2 hover:bg-gray-100">
                                         <span className="text-indigo-500 mr-2">📺</span>
-                                        Home Appliances
+                                        PC & Laptop Accessories
                                         <span className="ml-auto text-gray-400">›</span>
                                     </a>
                                 </li>
@@ -246,7 +246,7 @@ const MainNav = () => {
 
                         {/* <!-- Right expanded submenu content --> */}
                         <div className="flex-1 bg-white p-6">
-                            {/* <!-- Writing Tools Submenu --> */}
+      
                             <div id="laptops" className="submenu">
                                 <div className="grid grid-cols-3 gap-8 w-full">
                                     {/* <!-- Column 1 --> */}
@@ -280,7 +280,6 @@ const MainNav = () => {
                                 </div>
                             </div>
 
-                            {/* <!-- Books Submenu --> */}
                             <div id="computer-parts" className="submenu">
                                 <div className="grid grid-cols-3 gap-8 w-full">
                                     <div>

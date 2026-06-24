@@ -259,7 +259,7 @@ const CartPage: React.FC = () => {
 
   const updateCartQty = async (id: number, qty: number) => {
     try {
-      const response = await fetch(`http://localhost:8080/Edumart-Backend/UpdateCartQtyFromCart?id=${id}&qty=${qty}`, {
+      const response = await fetch(`http://localhost:8080/techmart/UpdateCartQtyFromCart?id=${id}&qty=${qty}`, {
         method: "GET",
         credentials: "include"
       });
@@ -303,7 +303,7 @@ const CartPage: React.FC = () => {
 
   const removeFromCart = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:8080/Edumart-Backend/RemoveFromCart?id=${id}`, {
+      const response = await fetch(`http://localhost:8080/techmart/RemoveFromCart?id=${id}`, {
         method: "GET",
         credentials: "include"
       });
