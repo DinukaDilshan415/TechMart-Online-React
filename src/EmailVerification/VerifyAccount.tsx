@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { TECHMART_BASE_URL, DEFAULT_HEADERS } from '../api/client';
 
 
 const VerifyAccount = () => {
@@ -12,11 +13,11 @@ const VerifyAccount = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/techmart/VerifyAccount", {
+      const response = await fetch(`${TECHMART_BASE_URL}/VerifyAccount`, {
         method: "POST",
         credentials: "include",
         headers: {
-          "Content-Type": "application/json"
+          ...DEFAULT_HEADERS,
         },
         body: JSON.stringify(verify)
       });
@@ -45,12 +46,15 @@ const VerifyAccount = () => {
   };
 
   const reSendEmail = async () => {
-  // Use toast.promise to handle loading, success, and error alerts
-  toast.promise(
-    fetch("http://localhost:8080/techmart/ReSendVerification", {
-      method: "GET",
-      credentials: "include", // <- this sends cookies like JSESSIONID
-    }).then(async (response) => {
+    // Use toast.promise to handle loading, success, and error alerts
+    toast.promise(
+      fetch(`${TECHMART_BASE_URL}/ReSendVerification`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          ...DEFAULT_HEADERS,
+        }
+      }).then(async (response) => {
         if (!response.ok) {
           throw new Error("Verification Code Send failed. Please try again");
         }
@@ -65,18 +69,18 @@ const VerifyAccount = () => {
         return json;
       }),
 
-    {
-      pending: 'Sending verification email...',
-      success: 'New verification code sent successfully ✅',
-      error: {
-        render({ data }: { data: Error }) {
-          // data is the error object thrown in catch or in .then
-          return data.message || 'Something went wrong ❌';
+      {
+        pending: 'Sending verification email...',
+        success: 'New verification code sent successfully ✅',
+        error: {
+          render({ data }: { data: Error }) {
+            // data is the error object thrown in catch or in .then
+            return data.message || 'Something went wrong ❌';
+          }
         }
       }
-    }
-  );
-};
+    );
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">

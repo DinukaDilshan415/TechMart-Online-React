@@ -1,6 +1,7 @@
-import { useState} from 'react';
-import type {FC, SVGProps, FormEvent, ChangeEvent, SyntheticEvent} from 'react'
+import { useState } from 'react';
+import type { FC, SVGProps, FormEvent, ChangeEvent, SyntheticEvent } from 'react'
 import { toast } from 'react-toastify';
+import { TECHMART_BASE_URL, DEFAULT_HEADERS } from '../api/client';
 
 // Type for SVG Icon props
 const MailIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
@@ -67,11 +68,11 @@ const AdminLoginPage: FC = () => {
         };
 
         try {
-            const response = await fetch("http://localhost:8080/techmart/AdminSignIn", {
+            const response = await fetch(`${TECHMART_BASE_URL}/AdminSignIn`, {
                 method: "POST",
                 credentials: "include",
                 headers: {
-                    "Content-Type": "application/json"
+                    ...DEFAULT_HEADERS,
                 },
                 body: JSON.stringify(signIn)
             });

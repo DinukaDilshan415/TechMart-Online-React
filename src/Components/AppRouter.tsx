@@ -12,6 +12,7 @@ import AdminLoginPage from "../Admin/AdminLoginPage";
 import AdminVerificationPage from "../Admin/AdminVerificationPage";
 import SingleProductView from "../Product/SingleProductView";
 import Cart from "../Cart/Cart";
+import CheckOut from "../Checkout/CheckOut";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,14 @@ const router = createBrowserRouter([
     path: "/product/cart",
     Component: Cart
   },
+  {
+    path: "/product/cart/checkout",
+    element: (
+      <ProtectedRoute>
+        <CheckOut />
+      </ProtectedRoute>
+    ),
+  }
 
 ]);
 

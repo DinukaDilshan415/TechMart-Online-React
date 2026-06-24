@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { toast } from 'react-toastify';
+import { TECHMART_BASE_URL, DEFAULT_HEADERS } from '../api/client';
 
 /**
  * Props for the VerificationIcon component.
@@ -64,9 +65,12 @@ const AdminVerificationPage: React.FC = () => {
   const reSendEmail = async () => {
 
     toast.promise(
-      fetch("http://localhost:8080/techmart/ReSendAdminVerification", {
+      fetch(`${TECHMART_BASE_URL}/ReSendAdminVerification`, {
         method: "GET",
-        credentials: "include", // <- this sends cookies like JSESSIONID
+        credentials: "include",
+        headers: {
+          ...DEFAULT_HEADERS,
+        }
       }).then(async (response) => {
         if (!response.ok) {
           throw new Error("Verification Code Send failed. Please try again");
@@ -95,15 +99,15 @@ const AdminVerificationPage: React.FC = () => {
     );
   };
 
-const hasRun = useRef(false);
+  const hasRun = useRef(false);
 
-useEffect(() => {
-  
-  if (!hasRun.current) {
-    reSendEmail();
-    hasRun.current = true;
-  }
-}, []);
+  useEffect(() => {
+
+    if (!hasRun.current) {
+      reSendEmail();
+      hasRun.current = true;
+    }
+  }, []);
 
   const verifyAccount = async () => {
     const verify = {
@@ -111,11 +115,11 @@ useEffect(() => {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/techmart/VerifyAdminAccount", {
+      const response = await fetch(`${TECHMART_BASE_URL}/VerifyAdminAccount`, {
         method: "POST",
         credentials: "include",
         headers: {
-          "Content-Type": "application/json"
+          ...DEFAULT_HEADERS,
         },
         body: JSON.stringify(verify)
       });

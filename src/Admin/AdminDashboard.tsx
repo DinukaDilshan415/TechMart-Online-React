@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
-import type { FC, ReactNode} from 'react'
+import type { FC, ReactNode } from 'react'
 import { toast } from 'react-toastify';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -9,6 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { LogOut, Warehouse } from 'lucide-react';
 import { Chart, registerables } from 'chart.js';
 import { useReactToPrint } from "react-to-print";
+import { TECHMART_BASE_URL, DEFAULT_HEADERS } from '../api/client';
 
 Chart.register(...registerables);
 
@@ -183,7 +184,7 @@ const mockReviews = [
         comment: 'Excellent pen, writes smoothly and looks very professional. Highly recommended!',
         date: '2024-07-15',
         status: 'Approved'
-    }, 
+    },
     // {
     //     id: 2,
     //     productName: 'Ergonomic Office Chair',
@@ -408,9 +409,12 @@ const showLogoutConfirm = () => {
 
 const logOutFromAccount = async () => {
     try {
-        const response = await fetch("http://localhost:8080/techmart/AdminSignOut", {
+        const response = await fetch(`${TECHMART_BASE_URL}/AdminSignOut`, {
             method: "GET",
             credentials: "include",
+            headers: {
+                ...DEFAULT_HEADERS,
+            }
         });
         if (response.ok) {
             const json = await response.json();
@@ -453,9 +457,12 @@ const DashboardPage: FC = () => {
         const loadDashboardData = async () => {
             setIsLoading(true);
             try {
-                const response = await fetch(`http://localhost:8080/Edumart-Backend/LoadDashboardData`, {
+                const response = await fetch(`${TECHMART_BASE_URL}/LoadDashboardData`, {
                     method: "GET",
-                    credentials: "include"
+                    credentials: "include",
+                    headers: {
+                        ...DEFAULT_HEADERS,
+                    }
                 });
 
                 if (response.ok) {
@@ -693,10 +700,12 @@ const ProductList: FC<{ setView: SetViewFn }> = ({ setView }) => {
             productId: id,
         };
         try {
-            const response = await fetch("http://localhost:8080/Edumart-Backend/ToggleProductStatus", {
+            const response = await fetch(`${TECHMART_BASE_URL}/ToggleProductStatus`, {
                 method: "PUT",
                 credentials: "include",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    ...DEFAULT_HEADERS,
+                },
                 body: JSON.stringify(updateData)
             });
             if (response.ok) {
@@ -748,9 +757,12 @@ const ProductList: FC<{ setView: SetViewFn }> = ({ setView }) => {
 
     const loadAllProducts = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/techmart/LoadAllProducts`, {
+            const response = await fetch(`${TECHMART_BASE_URL}/LoadAllProducts`, {
                 method: "GET",
-                credentials: "include"
+                credentials: "include",
+                headers: {
+                    ...DEFAULT_HEADERS,
+                }
             });
 
             if (response.ok) {
@@ -891,9 +903,12 @@ const AddEditProduct: FC<{ setView: SetViewFn; params?: { id: number } }> = ({ s
         });
 
         try {
-            const response = await fetch("http://localhost:8080/techmart/SaveProduct", {
+            const response = await fetch(`${TECHMART_BASE_URL}/SaveProduct`, {
                 method: "POST",
                 credentials: "include",
+                headers: {
+                    ...DEFAULT_HEADERS,
+                },
                 body: formData
             });
 
@@ -923,9 +938,12 @@ const AddEditProduct: FC<{ setView: SetViewFn; params?: { id: number } }> = ({ s
         });
 
         try {
-            const response = await fetch("http://localhost:8080/Edumart-Backend/StockUpdate", {
+            const response = await fetch(`${TECHMART_BASE_URL}/StockUpdate`, {
                 method: "POST",
                 credentials: "include",
+                headers: {
+                    ...DEFAULT_HEADERS,
+                },
                 body: formData
             });
 
@@ -955,9 +973,12 @@ const AddEditProduct: FC<{ setView: SetViewFn; params?: { id: number } }> = ({ s
         });
 
         try {
-            const response = await fetch("http://localhost:8080/Edumart-Backend/UpdateProductDetails", {
+            const response = await fetch(`${TECHMART_BASE_URL}/UpdateProductDetails`, {
                 method: "POST",
                 credentials: "include",
+                headers: {
+                    ...DEFAULT_HEADERS,
+                },
                 body: formData
             });
 
@@ -1004,9 +1025,12 @@ const AddEditProduct: FC<{ setView: SetViewFn; params?: { id: number } }> = ({ s
             });
 
             try {
-                const response = await fetch("http://localhost:8080/techmart/StockCheck", {
+                const response = await fetch(`${TECHMART_BASE_URL}/StockCheck`, {
                     method: "POST",
                     credentials: "include",
+                    headers: {
+                        ...DEFAULT_HEADERS,
+                    },
                     body: formData
                 });
 
@@ -1159,11 +1183,11 @@ const ManageBrands: FC<{ setView: SetViewFn }> = ({ setView }) => {
         };
 
         try {
-            const response = await fetch("http://localhost:8080/Edumart-Backend/SaveNewBrand", {
+            const response = await fetch(`${TECHMART_BASE_URL}/SaveNewBrand`, {
                 method: "POST",
                 credentials: "include",
                 headers: {
-                    "Content-Type": "application/json"
+                    ...DEFAULT_HEADERS,
                 },
                 body: JSON.stringify(brandData)
             });
@@ -1370,9 +1394,12 @@ const OrdersPage: FC = () => {
     const loadAllOrders = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch("http://localhost:8080/Edumart-Backend/LoadAllOrders", {
+            const response = await fetch(`${TECHMART_BASE_URL}/LoadAllOrders`, {
                 method: "GET",
                 credentials: "include",
+                headers: {
+                    ...DEFAULT_HEADERS,
+                }
             });
 
             if (!response.ok) {
@@ -1453,10 +1480,12 @@ const OrdersPage: FC = () => {
             orderId: orderId
         };
         try {
-            const response = await fetch("http://localhost:8080/Edumart-Backend/DeliveryStatusUpdate", {
+            const response = await fetch(`${TECHMART_BASE_URL}/DeliveryStatusUpdate`, {
                 method: "PUT",
                 credentials: "include",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    ...DEFAULT_HEADERS,
+                },
                 body: JSON.stringify(status)
             });
 
@@ -1547,9 +1576,12 @@ const CustomersPage: FC = () => {
 
     const loadCustomers = async () => {
         try {
-            const response = await fetch("http://localhost:8080/Edumart-Backend/LoadCustomers", {
+            const response = await fetch(`${TECHMART_BASE_URL}/LoadCustomers`, {
                 method: "GET",
                 credentials: "include",
+                headers: {
+                    ...DEFAULT_HEADERS,
+                }
             });
 
             if (response.ok) {
@@ -1739,8 +1771,11 @@ const AddEditUserDialog: FC<AddEditUserDialogProps> = ({ isOpen, onClose, onSave
 
     const loadRoleData = async () => {
         try {
-            const response = await fetch("http://localhost:8080/Edumart-Backend/LoadAdminRoleData", {
+            const response = await fetch(`${TECHMART_BASE_URL}/LoadAdminRoleData`, {
                 method: "GET", credentials: "include",
+                headers: {
+                    ...DEFAULT_HEADERS,
+                }
             });
             if (response.ok) {
                 const json = await response.json();
@@ -1763,11 +1798,11 @@ const AddEditUserDialog: FC<AddEditUserDialogProps> = ({ isOpen, onClose, onSave
     const saveUser = async () => {
 
         try {
-            const response = await fetch("http://localhost:8080/Edumart-Backend/SaveAdmins", {
+            const response = await fetch(`${TECHMART_BASE_URL}/SaveAdmins`, {
                 method: "POST",
                 credentials: "include",
                 headers: {
-                    "Content-Type": "application/json"
+                    ...DEFAULT_HEADERS,
                 },
                 body: JSON.stringify(formData)
             });
@@ -1853,9 +1888,12 @@ const AddEditUserDialog: FC<AddEditUserDialogProps> = ({ isOpen, onClose, onSave
 
 const loadUsers = async (setUsers: React.Dispatch<React.SetStateAction<User[]>>, handleCloseModal: () => void) => {
     try {
-        const response = await fetch("http://localhost:8080/Edumart-Backend/LoadAdmins", {
+        const response = await fetch(`${TECHMART_BASE_URL}/LoadAdmins`, {
             method: "GET",
             credentials: "include",
+            headers: {
+                ...DEFAULT_HEADERS,
+            }
         });
 
         if (response.ok) {
@@ -1915,10 +1953,12 @@ const ManageUsersPage: FC = () => {
             adminId: userId,
         };
         try {
-            const response = await fetch("http://localhost:8080/Edumart-Backend/ToggleAdminStatus", {
+            const response = await fetch(`${TECHMART_BASE_URL}/ToggleAdminStatus`, {
                 method: "PUT",
                 credentials: "include",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    ...DEFAULT_HEADERS,
+                },
                 body: JSON.stringify(updateData)
             });
             if (response.ok) {
@@ -2019,9 +2059,12 @@ const AdminDashboard: FC = () => {
 
     const loadProductData = async () => {
         try {
-            const response = await fetch("http://localhost:8080/techmart/LoadProductData", {
+            const response = await fetch(`${TECHMART_BASE_URL}/LoadProductData`, {
                 method: "GET",
                 credentials: "include",
+                headers: {
+                    ...DEFAULT_HEADERS,
+                }
             });
 
             if (response.ok) {

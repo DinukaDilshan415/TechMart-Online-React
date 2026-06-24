@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import React, { useEffect, useState, useRef } from 'react';
 import { toast } from 'react-toastify';
+import { TECHMART_BASE_URL, DEFAULT_HEADERS } from '../api/client';
 
 // --- Type Definitions for TypeScript ---
 
@@ -293,9 +294,12 @@ const RelatedProducts: React.FC = () => {
 const addToCart = async (productId: string, qty: number) => {
 
   try {
-    const response = await fetch(`http://localhost:8080/techmart/AddToCart?id=${productId}&qty=${qty}`, {
+    const response = await fetch(`${TECHMART_BASE_URL}/AddToCart?id=${productId}&qty=${qty}`, {
       method: "GET",
-      credentials: "include"
+      credentials: "include",
+      headers: {
+        ...DEFAULT_HEADERS,
+      }
     });
 
     if (response.ok) {
@@ -362,9 +366,12 @@ const ProductPage: React.FC = () => {
       }
 
       try {
-        const response = await fetch(`http://localhost:8080/techmart/LoadSingleProduct?id=${id}`, {
+        const response = await fetch(`${TECHMART_BASE_URL}/LoadSingleProduct?id=${id}`, {
           method: "GET",
-          credentials: "include"
+          credentials: "include",
+      headers: {
+        ...DEFAULT_HEADERS,
+      }
         });
 
         if (response.ok) {
@@ -413,9 +420,12 @@ const ProductPage: React.FC = () => {
       }
 
       try {
-        const response = await fetch(`http://localhost:8080/techmart/LoadProductReviews?id=${id}`, {
+        const response = await fetch(`${TECHMART_BASE_URL}/LoadProductReviews?id=${id}`, {
           method: "GET",
-          credentials: "include"
+          credentials: "include",
+      headers: {
+        ...DEFAULT_HEADERS,
+      }
         });
 
         if (response.ok) {
@@ -480,9 +490,12 @@ const ProductPage: React.FC = () => {
   const buyNowProcess = async (id: string, qty: number) => {
 
     try {
-      const response = await fetch(`http://localhost:8080/techmart/BuyNowProcess?id=${id}&qty=${qty}`, {
+      const response = await fetch(`${TECHMART_BASE_URL}/BuyNowProcess?id=${id}&qty=${qty}`, {
         method: "GET",
-        credentials: "include"
+        credentials: "include",
+      headers: {
+        ...DEFAULT_HEADERS,
+      }
       });
 
       if (response.ok) {
