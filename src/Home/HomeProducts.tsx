@@ -79,9 +79,14 @@ const kokopayLogoUrl = "https://www.promateworld.com/images/koko.png";
 
 const PopularCategoryCard: React.FC<PopularCategoryCardProps> = ({ category }) => (
   <div className="flex-shrink-0 w-28 text-center group">
-    <div className="w-24 h-24 mx-auto bg-gray-100 rounded-full flex items-center justify-center p-2 border border-gray-200 group-hover:shadow-md transition-shadow">
-      <img src={category.image} alt={category.name} className="max-w-full max-h-full object-contain" />
-    </div>
+<div className="w-24 h-24 mx-auto bg-gray-100 rounded-full flex items-center justify-center overflow-hidden border border-gray-200 group-hover:shadow-md transition-shadow">
+  <img 
+    src={category.image} 
+    alt={category.name} 
+    className="w-full h-full object-cover" 
+  />
+</div>
+
     <p className="mt-2 text-sm font-medium text-gray-700 group-hover:text-blue-600">{category.name}</p>
   </div>
 );
@@ -397,7 +402,7 @@ const HomeProducts: React.FC = () => {
             <PopularCategoryCard key={category.name} category={category} />
           ))}
         </div>
-        <hr className=" border-gray-200" />
+        <hr className=" border-gray-200 mt-5" />
       </section>
 
       {/* Product Sections */}
