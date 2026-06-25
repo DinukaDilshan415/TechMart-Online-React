@@ -136,7 +136,7 @@ const AdminLoginPage: FC = () => {
                                         value={email}
                                         onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                                         required
-                                        className="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-300 focus:border-[#0096ed] focus:ring-2 focus:ring-[#0096ed]/50 transition duration-200 ease-in-out"
+                                        className="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-300 focus:border-edumartPrimary focus:ring-2 focus:ring-edumartPrimary/50 transition duration-200 ease-in-out"
                                     />
                                 </div>
 
