@@ -178,11 +178,11 @@ let mockCustomers = [
 const mockReviews = [
     {
         id: 1,
-        productName: 'Parker Jotter Ballpoint Pen',
+        productName: 'Solar Neo Calling Smartwatch',
         customerName: 'John Doe',
         rating: 5,
-        comment: 'Excellent pen, writes smoothly and looks very professional. Highly recommended!',
-        date: '2024-07-15',
+        comment: 'Great product. Delivered on time as well.!',
+        date: '20264-06-25',
         status: 'Approved'
     },
     // {
@@ -2043,7 +2043,7 @@ const ManageUsersPage: FC = () => {
 };
 
 const SettingsPage: FC = () => (
-    <div><h2 className="text-2xl font-bold text-gray-800 mb-6">Settings</h2><div className="grid grid-cols-1 lg:grid-cols-3 gap-8"><div className="lg:col-span-2 space-y-8"><Card><h3 className="text-xl font-bold text-gray-800 mb-4 border-b pb-3">Store Details</h3><div className="space-y-4"><div><label className="block text-gray-700 font-medium mb-2">Store Name</label><input type="text" defaultValue="EduMart" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" /></div><div><label className="block text-gray-700 font-medium mb-2">Store Email</label><input type="email" defaultValue="contact@edumart.com" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" /></div></div></Card><Card><h3 className="text-xl font-bold text-gray-800 mb-4 border-b pb-3">Currency Options</h3><div className="space-y-4"><div><label className="block text-gray-700 font-medium mb-2">Currency</label><select className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"><option>LKR (Rs)</option><option>USD ($)</option><option>EUR (€)</option></select></div></div></Card></div><div className="lg:col-span-1"><Card><h3 className="text-xl font-bold text-gray-800 mb-4">Save Changes</h3><p className="text-gray-600 mb-4">Click the button below to save all your settings changes.</p><Button className="w-full">Save Settings</Button></Card></div></div></div>
+    <div><h2 className="text-2xl font-bold text-gray-800 mb-6">Settings</h2><div className="grid grid-cols-1 lg:grid-cols-3 gap-8"><div className="lg:col-span-2 space-y-8"><Card><h3 className="text-xl font-bold text-gray-800 mb-4 border-b pb-3">Store Details</h3><div className="space-y-4"><div><label className="block text-gray-700 font-medium mb-2">Store Name</label><input type="text" defaultValue="TechMart-Online" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" /></div><div><label className="block text-gray-700 font-medium mb-2">Store Email</label><input type="email" defaultValue="contact@techmart.com" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" /></div></div></Card><Card><h3 className="text-xl font-bold text-gray-800 mb-4 border-b pb-3">Currency Options</h3><div className="space-y-4"><div><label className="block text-gray-700 font-medium mb-2">Currency</label><select className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"><option>LKR (Rs)</option><option>USD ($)</option><option>EUR (€)</option></select></div></div></Card></div><div className="lg:col-span-1"><Card><h3 className="text-xl font-bold text-gray-800 mb-4">Save Changes</h3><p className="text-gray-600 mb-4">Click the button below to save all your settings changes.</p><Button className="w-full">Save Settings</Button></Card></div></div></div>
 );
 
 
