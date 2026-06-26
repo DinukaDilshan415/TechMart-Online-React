@@ -1,4 +1,4 @@
-// src/components/MetricsDashboard.tsx
+
 
 import { useMetrics } from '../monitoring/useMetrics';
 import { useEffect, useRef } from 'react';
@@ -9,7 +9,6 @@ export default function MetricsDashboard() {
   const chartRef  = useRef<HTMLCanvasElement>(null);
   const chartInst = useRef<Chart | null>(null);
 
-  // Update Chart.js sparkline whenever history changes
   useEffect(() => {
     if (!chartRef.current) return;
 
@@ -40,10 +39,9 @@ export default function MetricsDashboard() {
         }
       });
     } else {
-      // Just update data — no full re-render
       chartInst.current.data.datasets[0].data = history;
       chartInst.current.data.labels = history.map((_, i) => `T-${history.length - i}`);
-      chartInst.current.update('none');   // 'none' = no animation on update
+      chartInst.current.update('none'); 
     }
   }, [history]);
 
@@ -57,7 +55,7 @@ export default function MetricsDashboard() {
 
   if (!data) return null;
 
-  // Percentage Calculations
+
   const dbPercent   = Math.round((data.dbConnectionsInUse / data.dbConnectionsMax) * 100);
   const heapPercent = Math.round((data.heapUsedMB / data.heapMaxMB) * 100);
   const mdbPercent  = Math.round((data.activeMdbPoolCount / data.maxMdbPoolSize) * 100 || 0);
