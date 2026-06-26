@@ -4,7 +4,7 @@ import { fetchMetrics, type MetricsDTO } from '../monitoring/metricsService';
 
 export interface MetricsState {
   data:    MetricsDTO | null;
-  history: number[];          // last 20 avgResponseTimeMs values
+  history: number[]; 
   error:   string | null;
   loading: boolean;
 }
@@ -30,7 +30,7 @@ export function useMetrics(pollIntervalMs = 3000): MetricsState {
   }
 
   useEffect(() => {
-    poll();                                          // immediate first call
+    poll();
     timerRef.current = setInterval(poll, pollIntervalMs);
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);

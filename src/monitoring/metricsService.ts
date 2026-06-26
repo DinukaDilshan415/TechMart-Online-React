@@ -1,7 +1,5 @@
 import { TECHMART_BASE_URL, DEFAULT_HEADERS } from '../api/client';
 
-// src/services/metricsService.ts
-
 export interface MetricsDTO {
   avgResponseTimeMs:  number;
   activeSessionCount: number;
@@ -9,9 +7,9 @@ export interface MetricsDTO {
   jmsMessageCount:    number;
   mdbProcessingRate:  number;
   dbConnectionsInUse: number;
-  dbConnectionsMax:   number;  // now 200
-  dbPoolMin:          number;  // now 50
-  dbUsagePercent:     number;  // real % from tracker
+  dbConnectionsMax:   number;
+  dbPoolMin:          number; 
+  dbUsagePercent:     number;
   jmsQueueDepth:      number;
   heapUsedMB:         number;
   heapMaxMB:          number;
@@ -25,7 +23,6 @@ export interface MetricsDTO {
   maxMdbPoolSize: number;
 }
 
-// Full Payara URL — change 'techmart' to match your WAR context root
 const METRICS_URL = `${TECHMART_BASE_URL}/api/metrics`;
 
 export async function fetchMetrics(): Promise<MetricsDTO> {
