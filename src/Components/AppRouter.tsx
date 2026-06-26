@@ -13,6 +13,7 @@ import AdminVerificationPage from "../Admin/AdminVerificationPage";
 import SingleProductView from "../Product/SingleProductView";
 import Cart from "../Cart/Cart";
 import CheckOut from "../Checkout/CheckOut";
+import MetricsDashboard from "../monitoring/MetricsDashboard";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
         <CheckOut />
       </ProtectedRoute>
     ),
+  },
+  {
+    path: "/monitor/performance",
+    Component: MetricsDashboard
   }
 
 ]);
