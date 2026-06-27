@@ -148,7 +148,7 @@ const MainNav = () => {
 
     return (
         <>
-            <main className="pt-20">
+            <main className="pt-28">
                 {/* <!-- Main Navigation --> */}
                 <nav className="bg-edumartPrimary">
                     <div className="container mx-auto px-4">

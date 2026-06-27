@@ -2042,9 +2042,112 @@ const ManageUsersPage: FC = () => {
     );
 };
 
-const SettingsPage: FC = () => (
-    <div><h2 className="text-2xl font-bold text-gray-800 mb-6">Settings</h2><div className="grid grid-cols-1 lg:grid-cols-3 gap-8"><div className="lg:col-span-2 space-y-8"><Card><h3 className="text-xl font-bold text-gray-800 mb-4 border-b pb-3">Store Details</h3><div className="space-y-4"><div><label className="block text-gray-700 font-medium mb-2">Store Name</label><input type="text" defaultValue="TechMart-Online" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" /></div><div><label className="block text-gray-700 font-medium mb-2">Store Email</label><input type="email" defaultValue="contact@techmart.com" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" /></div></div></Card><Card><h3 className="text-xl font-bold text-gray-800 mb-4 border-b pb-3">Currency Options</h3><div className="space-y-4"><div><label className="block text-gray-700 font-medium mb-2">Currency</label><select className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"><option>LKR (Rs)</option><option>USD ($)</option><option>EUR (€)</option></select></div></div></Card></div><div className="lg:col-span-1"><Card><h3 className="text-xl font-bold text-gray-800 mb-4">Save Changes</h3><p className="text-gray-600 mb-4">Click the button below to save all your settings changes.</p><Button className="w-full">Save Settings</Button></Card></div></div></div>
-);
+const SettingsPage: FC = () => {
+    const [promoMessage, setPromoMessage] = useState('');
+    const [isSendingPromo, setIsSendingPromo] = useState(false);
+
+    useEffect(() => {
+        const eventSource = new EventSource(
+            `${TECHMART_BASE_URL}/AlertReceiver`
+        );
+
+        eventSource.onmessage = (event) => {
+            console.log(event.data);
+        };
+
+        return () => eventSource.close();
+    }, []);
+
+    const handleSendPromotion = async () => {
+        const message = promoMessage.trim();
+
+        if (!message) {
+            toast.error('Please enter a promotional message first.');
+            return;
+        }
+
+        fetch(`${TECHMART_BASE_URL}/SendPromotionMessage`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                ...DEFAULT_HEADERS,
+            },
+            body: JSON.stringify({ message }),
+        }).catch(err => console.error(err));
+
+        toast.success('Promotional message sent successfully!');
+        setPromoMessage('');
+    };
+
+    return (
+        <div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">Settings</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div className="lg:col-span-2 space-y-8">
+                    <Card>
+                        <h3 className="text-xl font-bold text-gray-800 mb-4 border-b pb-3">Store Details</h3>
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-2">Store Name</label>
+                                <input type="text" defaultValue="TechMart-Online" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-2">Store Email</label>
+                                <input type="email" defaultValue="contact@techmart.com" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            </div>
+                        </div>
+                    </Card>
+
+                    <Card>
+                        <h3 className="text-xl font-bold text-gray-800 mb-4 border-b pb-3">Currency Options</h3>
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-2">Currency</label>
+                                <select className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                                    <option>LKR (Rs)</option><option>USD ($)</option>
+                                    <option>EUR (€)</option></select>
+                            </div>
+                        </div>
+                    </Card>
+
+                    <Card>
+                        <h3 className="text-xl font-bold text-gray-800 mb-4 border-b pb-3">Send Promotional Message</h3>
+                        <p className="text-sm text-gray-600 mb-4">Broadcast a promo message to your customers from here.</p>
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-2">Message</label>
+                                <textarea
+                                    value={promoMessage}
+                                    onChange={(e) => setPromoMessage(e.target.value)}
+                                    rows={4}
+                                    placeholder="Example: Enjoy 20% off selected items this weekend!"
+                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+                            <div className="flex justify-end">
+                                <button
+                                    type="button"
+                                    onClick={handleSendPromotion}
+                                    disabled={isSendingPromo}
+                                    className="px-5 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                    {isSendingPromo ? 'Sending...' : 'Send Promotion'}
+                                </button>
+                            </div>
+                        </div>
+                    </Card>
+
+
+                </div>
+                <div className="lg:col-span-1"><Card>
+                    <h3 className="text-xl font-bold text-gray-800 mb-4">Save Changes</h3>
+                    <p className="text-gray-600 mb-4">Click the button below to save all your settings changes.</p>
+                    <Button className="w-full">Save Settings</Button></Card>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 
 // --- Main App Component ---
