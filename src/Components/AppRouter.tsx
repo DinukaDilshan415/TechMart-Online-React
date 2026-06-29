@@ -14,6 +14,7 @@ import SingleProductView from "../Product/SingleProductView";
 import Cart from "../Cart/Cart";
 import CheckOut from "../Checkout/CheckOut";
 import MetricsDashboard from "../monitoring/MetricsDashboard";
+import Search from "../ProductSearch/Search";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,11 @@ const router = createBrowserRouter([
   {
     path: "/product/cart",
     Component: Cart
+  },
+  
+  {
+    path: "/product/search",
+    Component: Search
   },
   {
     path: "/product/cart/checkout",
